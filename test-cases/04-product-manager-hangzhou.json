@@ -1,0 +1,17 @@
+{
+  "id": "04-pm-hangzhou",
+  "name": "42岁 产品经理 杭州 35K (非工程师)",
+  "description": "完全跨出测试岗位的画像. 当前 mock_market.json 全是测试相关岗位.",
+  "probe": "这是项目通用性的边界测试. Agent 2 会不会硬把 mock 数据套到 PM 身上 (说 PM 应该学 LangChain)? 还是说能识别出'我没有这个领域的数据', 转而完全靠模型常识生成市场情报? 失败是预期内的, 它告诉我们阶段 3 必须做'垂直化深耕' 还是 '通用化拓展'.",
+  "profile": {
+    "age": 42,
+    "role": "产品经理",
+    "role_category": "pm",
+    "industry": "本地生活",
+    "city": "杭州",
+    "family": "一个孩子, 配偶在职",
+    "mortgage_wan": 120,
+    "current_monthly_salary_k": 35,
+    "expectation": "想转型 B 端 SaaS 产品方向"
+  }
+}

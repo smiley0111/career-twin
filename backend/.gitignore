@@ -1,0 +1,13 @@
+.env
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+.idea/
+.vscode/
+jobs.db
+jobs.db-journal
+
+# Stage 4: Chroma 向量库 (跑 build_index.py 重建)
+chroma_data/

@@ -1,0 +1,38 @@
+# === Secrets（第一优先级，绝不能进 git） ===
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+
+# === Python ===
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# === Node / Next.js ===
+node_modules/
+.next/
+out/
+*.tsbuildinfo
+next-env.d.ts
+
+# === IDE / OS ===
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# === 本地数据（会被 build_index.py 重建） ===
+backend/jobs.db
+backend/jobs.db-journal
+backend/chroma_data/
+
+# === 构建产物 ===
+dist/
+build/

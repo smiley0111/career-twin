@@ -1,0 +1,17 @@
+{
+  "id": "01-young-beijing",
+  "name": "28岁 后端 北京 25K",
+  "description": "年轻工程师, 一线城市, 工作 5 年左右, 处于职业上升期.",
+  "probe": "Agent 会不会还套用'裁员焦虑'叙事? 年轻人的核心诉求应该是'快速成长 / 涨薪 / 大厂 vs 创业'之类, 不是'保住工作'. 风险评分应该明显低于 5.",
+  "profile": {
+    "age": 28,
+    "role": "Java 后端开发",
+    "role_category": "developer",
+    "industry": "电商",
+    "city": "北京",
+    "family": "未婚, 与父母同住",
+    "mortgage_wan": 0,
+    "current_monthly_salary_k": 25,
+    "expectation": "3 年内涨到 50K, 进大厂"
+  }
+}

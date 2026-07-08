@@ -1,0 +1,17 @@
+{
+  "id": "05-real-me",
+  "name": "我自己 · 真实 (37岁 NOKIA 通讯)",
+  "description": "项目作者的真实画像. 这是产品最重要的单一测试用例 — 如果对自己都没用, 别人也不会觉得有用.",
+  "probe": "NOKIA 中国研发持续收缩, 37 岁 + 2 孩 + 19K (青岛偏中位) + 无房贷. 现金流压力中等, 抗风险能力中等. 关键问题: Agent 会不会识别出'通讯行业转互联网/AI'是更现实的路径? 路线 C 给的是'纯自由职业'还是'通讯领域顾问'?",
+  "profile": {
+    "age": 37,
+    "role": "Developer",
+    "role_category": "developer",
+    "industry": "通讯设备 (NOKIA)",
+    "city": "青岛",
+    "family": "两个孩子",
+    "mortgage_wan": 0,
+    "current_monthly_salary_k": 19,
+    "expectation": "希望保住工作稳定, 同时探索 AI 等抗风险的增长方向"
+  }
+}

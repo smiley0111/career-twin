@@ -1,0 +1,17 @@
+{
+  "id": "03-mid-burdened",
+  "name": "35岁 前端 深圳 60K + 房贷200万 + 二胎",
+  "description": "典型互联网中年焦虑: 高薪, 高负债, 多孩, 一线城市. 试错成本最高的群体.",
+  "probe": "Agent 会不会还盲目推荐'转型 AI'? 在这种现金流压力下, 转型 6-12 个月的收入下滑可能直接现金流断裂. Agent 应该明确指出: 转型路线的可行性受现金流限制, 优先考虑'守住高薪 + 副业试水' 而不是'全力转型'.",
+  "profile": {
+    "age": 35,
+    "role": "前端架构师",
+    "role_category": "developer",
+    "industry": "在线教育",
+    "city": "深圳",
+    "family": "二胎, 配偶全职在家, 老人需要赡养",
+    "mortgage_wan": 200,
+    "current_monthly_salary_k": 60,
+    "expectation": "维持收入, 同时探索抗风险方向"
+  }
+}

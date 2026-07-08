@@ -1,0 +1,17 @@
+{
+  "id": "00-baseline",
+  "name": "我自己 (47岁测试经理青岛)",
+  "description": "项目最初的基准画像, 用来对比 prompt 改动前后的输出差异.",
+  "probe": "基线对照, 任何改动后先跑一遍这个看回归.",
+  "profile": {
+    "age": 47,
+    "role": "测试经理",
+    "role_category": "manager",
+    "industry": "互联网电视",
+    "city": "青岛",
+    "family": "两个孩子",
+    "mortgage_wan": 60,
+    "current_monthly_salary_k": 30,
+    "expectation": "尽量保持收入"
+  }
+}
