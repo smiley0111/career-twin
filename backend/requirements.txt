@@ -5,6 +5,10 @@ python-dotenv>=1.0.1
 openai>=1.54.0
 instructor>=1.6.4
 
+# 我自己的 SDK: 统一 LLM 客户端 + 成本追踪
+# 本地开发建议: pip install -e ../../dodu-ai-toolkit (可实时同步 SDK 修改)
+dodu-ai @ git+https://github.com/smiley0111/dodu-ai-toolkit.git@main
+
 # Stage 4 RAG: 向量检索
 chromadb>=0.5.0           # 向量库, 本地文件持久化
 fastembed>=0.4.0          # ONNX embedding (BGE-small-zh), 比 sentence-transformers 轻量

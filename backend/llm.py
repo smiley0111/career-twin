@@ -1,33 +1,34 @@
-"""统一的 LLM 客户端入口.
+"""统一的 LLM 客户端入口 (基于 dodu_ai SDK).
 
-设计原则:
-- 一个文件管所有模型, 切换厂商只改这里
-- 用 Instructor 包一层, 强制结构化输出
-- DeepSeek/通义/Qwen 都兼容 OpenAI 协议, 所以底层都用 openai SDK
+变更历史:
+- Stage 1-4: 直接 openai.OpenAI + instructor.from_openai
+- Stage 5 (2026-07 重构): 收敛到 dodu_ai.DoduClient, 白得成本追踪 (dodu.stats)
+
+对外接口保持不变, 3 个 agent 仍然 from llm import client, DEFAULT_MODEL 即可.
+新增了 dodu 对象, 可以通过它拿到 .stats.summary() / .stats.total_cost_usd 等.
 """
 import os
-from openai import OpenAI
-import instructor
-from dotenv import load_dotenv
 
-load_dotenv()
+from dodu_ai import DoduClient
 
 
-def _build_client() -> tuple[instructor.Instructor, str]:
-    """根据环境变量构造一个 Instructor 客户端 + 默认模型名."""
-    api_key = os.getenv("DEEPSEEK_API_KEY") or os.getenv("OPENAI_API_KEY")
-    base_url = os.getenv("DEEPSEEK_BASE_URL") or os.getenv("OPENAI_BASE_URL")
-    model = os.getenv("DEEPSEEK_MODEL") or os.getenv("OPENAI_MODEL") or "deepseek-chat"
+def _pick_provider() -> str:
+    """按当前 .env 中已配置的 key 自动挑选 provider.
 
-    if not api_key:
-        raise RuntimeError(
-            "未找到 API KEY. 请复制 .env.example 为 .env 并填入 DEEPSEEK_API_KEY"
-        )
-
-    raw = OpenAI(api_key=api_key, base_url=base_url)
-    # Instructor 把 LLM 输出强制对齐到 Pydantic 模型, 失败自动重试
-    client = instructor.from_openai(raw, mode=instructor.Mode.JSON)
-    return client, model
+    保持向后兼容: 老的 .env 只填 DEEPSEEK_API_KEY 或 OPENAI_API_KEY 都能跑.
+    """
+    if os.getenv("DEEPSEEK_API_KEY"):
+        return "deepseek"
+    if os.getenv("OPENAI_API_KEY"):
+        return "openai"
+    return os.getenv("DODU_AI_PROVIDER", "deepseek")
 
 
-client, DEFAULT_MODEL = _build_client()
+dodu: DoduClient = DoduClient(
+    provider=_pick_provider(),
+    base_url=os.getenv("DEEPSEEK_BASE_URL") or os.getenv("OPENAI_BASE_URL"),
+    default_model=os.getenv("DEEPSEEK_MODEL") or os.getenv("OPENAI_MODEL"),
+)
+
+client = dodu.instructor()
+DEFAULT_MODEL: str = dodu.default_model
