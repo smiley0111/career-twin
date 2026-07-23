@@ -7,7 +7,7 @@
 未来可以单独把这个 Agent 换成更强的模型 (如 Claude Sonnet).
 """
 from models import UserProfile, PersonaAnalysis, MarketIntel, CareerSimulation
-from llm import client, DEFAULT_MODEL
+from llm import routed_client
 
 
 SYSTEM_PROMPT = """你是一位职业路径推演专家. 你不替用户做决定, 你只把每条路的代价/风险/收益讲清楚.
@@ -84,8 +84,9 @@ def simulate_paths(
 请生成 3 条差异化路线 (保守/转型/自由), 严格按要求填充每个字段.
 最后给出权衡建议, 不要替用户做决定.
 """
+    client, model = routed_client("simulator")
     return client.chat.completions.create(
-        model=DEFAULT_MODEL,
+        model=model,
         response_model=CareerSimulation,
         messages=[
             {"role": "system", "content": SYSTEM_PROMPT},

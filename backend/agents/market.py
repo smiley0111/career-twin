@@ -21,7 +21,7 @@
 from models import (
     PersonaAnalysis, UserProfile, MarketIntel, Job, JobCategory,
 )
-from llm import client, DEFAULT_MODEL
+from llm import routed_client
 from jobs_repo import list_jobs
 from vector_store import get_store
 
@@ -163,8 +163,9 @@ def gather_market_intel(profile: UserProfile, persona: PersonaAnalysis) -> Marke
 **如果召回里有 AI 岗位, 必须独立给一个 PositionIntel**.
 **summary 要点出真实数据中的具体洞察**, 不要套话.
 """
+    client, model = routed_client("market")
     return client.chat.completions.create(
-        model=DEFAULT_MODEL,
+        model=model,
         response_model=MarketIntel,
         messages=[
             {"role": "system", "content": SYSTEM_PROMPT},

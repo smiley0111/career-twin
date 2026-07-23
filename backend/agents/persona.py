@@ -4,7 +4,7 @@
 输出: PersonaAnalysis (职业阶段/诉求/约束/风险)
 """
 from models import UserProfile, PersonaAnalysis
-from llm import client, DEFAULT_MODEL
+from llm import routed_client
 
 
 SYSTEM_PROMPT = """你是一位资深的职业规划顾问, 擅长分析中国互联网行业 30-55 岁工程师的处境.
@@ -83,8 +83,9 @@ def analyze_persona(profile: UserProfile) -> PersonaAnalysis:
 - 薪资判断是否做了双向对比? (低于均值是优势, 不是劣势)
 - risk_score 是否同时考虑了减分项? (年轻 / 无房贷 / 配偶有收入 都会降低分数)
 """
+    client, model = routed_client("persona")
     return client.chat.completions.create(
-        model=DEFAULT_MODEL,
+        model=model,
         response_model=PersonaAnalysis,
         messages=[
             {"role": "system", "content": SYSTEM_PROMPT},
