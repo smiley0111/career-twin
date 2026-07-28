@@ -9,6 +9,7 @@ import type {
   JobCategory,
 } from "./types";
 import { JOB_CATEGORY_LABELS } from "./types";
+import CareerGraph from "./CareerGraph";
 
 const DEFAULT_PROFILE: UserProfile = {
   age: 47,
@@ -236,8 +237,52 @@ function Field({
 
 function Report({ report }: { report: CareerReport }) {
   const { persona, market, simulation } = report;
+  const [view, setView] = useState<"graph" | "cards">("graph");
   return (
     <section className="mt-8 space-y-6">
+      {/* 视图切换 */}
+      <div className="flex items-center justify-between">
+        <h2 className="text-xl font-bold">分析结果</h2>
+        <div className="inline-flex rounded-lg border border-neutral-300 bg-white p-0.5 text-sm">
+          <button
+            onClick={() => setView("graph")}
+            className={`rounded-md px-3 py-1 transition ${
+              view === "graph"
+                ? "bg-neutral-900 text-white"
+                : "text-neutral-600 hover:text-neutral-900"
+            }`}
+          >
+            路线图
+          </button>
+          <button
+            onClick={() => setView("cards")}
+            className={`rounded-md px-3 py-1 transition ${
+              view === "cards"
+                ? "bg-neutral-900 text-white"
+                : "text-neutral-600 hover:text-neutral-900"
+            }`}
+          >
+            详细卡片
+          </button>
+        </div>
+      </div>
+
+      {view === "graph" && (
+        <Card title="职业路线图">
+          <p className="mb-3 text-sm text-neutral-500">
+            从"现在的你"出发，AI 推演出的 {simulation.paths.length}{" "}
+            条路线及各自对标的岗位。边的颜色代表成功率（绿=高 / 琥珀=中 / 红=低）。可拖动节点、滚轮缩放。
+          </p>
+          <CareerGraph report={report} />
+          <div className="mt-4 rounded-lg bg-neutral-900 p-4 text-sm text-neutral-100">
+            <p className="mb-1 font-medium text-neutral-300">权衡建议</p>
+            <p>{simulation.recommendation}</p>
+          </div>
+        </Card>
+      )}
+
+      {view === "cards" && (
+        <>
       {/* 画像总结 */}
       <Card title="画像分析">
         <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
@@ -357,6 +402,8 @@ function Report({ report }: { report: CareerReport }) {
           <p>{simulation.recommendation}</p>
         </div>
       </Card>
+        </>
+      )}
     </section>
   );
 }
