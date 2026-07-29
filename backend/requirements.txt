@@ -11,4 +11,8 @@ dodu-ai @ git+https://github.com/smiley0111/dodu-ai-toolkit.git@main
 
 # Stage 4 RAG: 向量检索
 chromadb>=0.5.0           # 向量库, 本地文件持久化
-fastembed>=0.4.0          # ONNX embedding (BGE-small-zh), 比 sentence-transformers 轻量
+
+# 本地 embedder (EMBEDDING_PROVIDER=local 时才需要). 默认走 API 模式, 不装它:
+# 它会拖进 onnxruntime (~200MB, 且在部分 Windows/容器上有 DLL 加载问题).
+# 想本地跑 fastembed 的话: pip install "fastembed>=0.4.0"
+# fastembed>=0.4.0

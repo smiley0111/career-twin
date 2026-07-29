@@ -1,0 +1,22 @@
+# 前端单独部署到 Vercel, 不进后端镜像
+frontend
+
+# 依赖/构建产物
+**/.venv
+**/venv
+**/node_modules
+**/__pycache__
+**/*.pyc
+**/.next
+
+# 密钥 (平台环境变量注入, 绝不进镜像)
+**/.env
+
+# 本地数据 (镜像启动时由 prestart.py 重建)
+backend/jobs.db
+backend/chroma_data
+
+# 杂项
+.git
+.gitignore
+*.md

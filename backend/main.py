@@ -4,6 +4,7 @@
 """
 import json
 import logging
+import os
 from pathlib import Path
 
 from fastapi import FastAPI, HTTPException
@@ -30,9 +31,16 @@ logging.basicConfig(
 
 app = FastAPI(title="Career Twin", version="0.1.0")
 
+# CORS 来源可通过环境变量覆盖 (逗号分隔). 部署后前端走 Next.js rewrite 代理,
+# 浏览器只跟 Vercel 域名通信, 本不触发 CORS; 但若有人直连后端 API, 这层就有用.
+# 例: CORS_ORIGINS="https://career-twin.vercel.app,https://mydomain.com"
+_default_origins = "http://localhost:3000"
+_origins_env = os.getenv("CORS_ORIGINS", _default_origins)
+_allow_origins = [o.strip() for o in _origins_env.split(",") if o.strip()]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=_allow_origins,
     allow_methods=["*"],
     allow_headers=["*"],
 )
